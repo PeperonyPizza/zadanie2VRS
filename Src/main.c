@@ -61,17 +61,17 @@ int main(void)
   //Reset mode for pin 4
   *((volatile uint32_t *)((uint32_t) 0x48000000 + 0x00U)) &= ~(uint32_t)(0x3 << 8);
   //Set mode for pin 4
-  *((volatile uint32_t *)((uint32_t) 0x48000000 + 0x00U)) |= ~(uint32_t)(0x1 << 8);
+  *((volatile uint32_t *)((uint32_t) 0x48000000 + 0x00U)) |= (uint32_t)(0x1 << 8);
 
   //Reset pull up for GPIOB pin 3 (input)
-  *((volatile uint32_t *)((uint32_t) (0x48000000 + 0x0CU))) &= (0x3 << 6);
+  *((volatile uint32_t *)((uint32_t) (0x48000000 + 0x0CU))) &= ~(0x3 << 6);
   //Set pull up for GPIOB pin 3 (input)
   *((volatile uint32_t *)((uint32_t) (0x48000000 + 0x0CU))) |= (0x1 << 6);
 
   //reset no pull for GPIOB pin 4
    *((volatile uint32_t *)((uint32_t) (0x48000000 + 0x0CU))) &= ~(0x3 << 8);
    //Set no pull for GPIOB pin 4
-    *((volatile uint32_t *)((uint32_t) (0x48000000 + 0x0CU))) |= ~(0x1 << 8);
+    *((volatile uint32_t *)((uint32_t) (0x48000000 + 0x0CU))) |= (0x1 << 8);
 
 
    /*GPIO OTYPER register*/
@@ -85,10 +85,10 @@ int main(void)
 
 
 
-/*
+
 
   while (1){
-	  if(BUTTON_GET_STATE == 1){
+	  if(BUTTON_GET_STATE == 0){
 		  // 0.25s delay
 		  LL_mDelay(250);
 		  LED_ON;
@@ -104,19 +104,21 @@ int main(void)
 		  LL_mDelay(1000);
 		  LED_OFF;
 	  }
+  }
 
-*/
-
+	  /*
     while(1){
 
-    	if(!(*((volatile uint32_t *)((uint32_t)(0x48000000 + 0x10U))) & (1 << 3) ) == 1){
+    	if(!(*((volatile uint32_t *)((uint32_t)(0x48000000 + 0x10U))) & (0x1 << 3) ) == 1){
   		  // 0.25s delay
   		  LL_mDelay(250);
   		  LED_ON;
   		  // 0.25s delay
   		  LL_mDelay(250);
   		  LED_OFF;
-    	}else{
+    	}
+
+    	else{
   		  // 1s delay
   		  LL_mDelay(1000);
   		  LED_ON;
@@ -125,7 +127,7 @@ int main(void)
   		  LED_OFF;
     	}
     }
-
+*/
 
 
 
